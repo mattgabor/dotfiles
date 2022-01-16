@@ -1,0 +1,24 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jquery": true,
+    "jest": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, {
+      "extensions": [".js", ".jsx"]
+    }],
+    "import/extensions": {
+      "js": "never",
+      "jsx": "never"
+    },
+    "import/prefer-default-export": 0,
+    "object-curly-newline": 0,
+    "camelcase": 0,
+    "no-underscore-dangle": 0
+  }
+}

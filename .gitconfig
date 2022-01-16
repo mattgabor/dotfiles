@@ -1,0 +1,33 @@
+[user]
+	name = Matt Gabor
+	email = matt_gabor@intuit.com
+[alias]
+	rb = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
+[core]
+	excludesfile = /Users/mgabor/.gitignore_global
+	editor = code -n -w
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[merge]
+	tool = sourcetree
+[push]
+	default = current
+[pull]
+	default = current
+	rebase = false
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[commit]
+	template = /Users/mattgabor/.stCommitMsg
+[init]
+	templatedir = ~/.git_template
+[filesystem "Oracle Corporation|1.8.0_121|/dev/disk1s1"]
+	timestampResolution = 1003 milliseconds
+	minRacyThreshold = 0 nanoseconds
