@@ -1,0 +1,64 @@
+##########################
+#### HELPER FUNCTIONS ####
+##########################
+
+# save current working directory to a global variable
+save_dir() {
+	export TEMP_WORKING_DIRECTORY=$(pwd)
+}
+
+# cd to the working directory stored in global variable by savedir
+return_dir() {
+	cd $TEMP_WORKING_DIRECTORY
+}
+
+# $1 = dir
+# $2 = command string
+run_in_dir() {
+	save_dir
+	cd $1
+	eval "$2"
+	return_dir
+}
+
+# run $1 and return to current working directory after
+run_and_return() {
+	save_dir
+	eval "$1"
+	return_dir
+}
+
+# display information about process on this port
+port() {
+	lsof -i tcp:$1
+}
+
+# kill the process running on this port
+port-kill() {
+	echo "Killing port process:"
+	port $1
+	kill -9 $(lsof -ti tcp:$1)
+}
+
+# cd to the current open window in finder
+cdf() {
+  target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+  if [ "$target" != "" ]; then
+    cd "$target"; pwd
+  else
+    echo 'No Finder window found' >&2
+  fi
+}
+
+# write and open file
+function wo() { 
+  touch "$1"; o $1; 
+}
+
+# functions
+# gx: add, commit, and push to current branch
+function gx() {
+  git add .
+  git commit -a -m "$1"
+  git push
+}

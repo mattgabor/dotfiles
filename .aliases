@@ -1,25 +1,12 @@
 # mac finder stuff
-cdf() {
-        target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
-        if [ "$target" != "" ]; then
-                cd "$target"; pwd
-        else
-                echo 'No Finder window found' >&2
-        fi
-}
 alias f='open -a Finder ./'
 alias o='open -a '\''Visual Studio Code'\'' .'
 
-# git stuff
-alias git-delete-merged='git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
-alias prunelocal="git remote prune origin; git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D"
-alias ggforce="ggpush --no-verify -f"
-
 # unix stuff
-alias t='trash'
 alias cat='ccat'
 alias ll='ls -al'
 alias reset-dns='sudo killall -HUP mDNSResponder'
+alias t='trash'
 
 # misc stuff
 alias dockspace="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}';killall Dock"
@@ -32,23 +19,9 @@ alias c='/Applications/Chrome\ Remote.app/Contents/MacOS/Google\ Chrome --args -
 alias cr='/Applications/Chrome\ Remote.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222'
 alias crs='/Applications/Chrome\ Remote.app/Contents/MacOS/Google\ Chrome --args --disable-web-security --user-data-dir --remote-debugging-port=9222'
 
-# functions
-# gx: add, commit, and push
-function gx() {
-    git add .
-    git commit -a -m "$1"
-    git push
-}
-
-function wo() { 
-    touch "$1"; o $1; 
-}
-
-# npm/yarn
+# npm
 alias npmreg="npm config set registry https://registry.npmjs.org/"
 alias npm-exec='PATH=$(npm bin):$PATH'
-alias s="yarn start"
-alias se="yarn serve"
 
 # docker
 alias dps='docker ps --format="table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
